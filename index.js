@@ -3,6 +3,7 @@ const express = require('express');
 const cors = require("cors");
 const connect = require("./config/connect");
 const authRouter = require("./routes/auth.routes");
+const { deserialize } = require("./middlewares/deserializeUser");
 const app = express();
 const PORT = process.env.PORT || 8080;
 
@@ -10,6 +11,7 @@ const PORT = process.env.PORT || 8080;
 app.use(express.json());
 app.use(cors());
 connect();
+app.use(deserialize);
 app.use("/api/v1", authRouter);
 app.get("/api/v1/health-check", (req, res) => res.status(200).json({ message: "SERVER IS RUNNING" }))
 

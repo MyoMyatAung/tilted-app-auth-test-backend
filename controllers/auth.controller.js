@@ -50,3 +50,11 @@ exports.signUpHandler = async (req, res) => {
     return errorResponse(res, HTTP_STATUS.INTERNAL_SERVER_ERROR, HTTP_MESSAGES.INTERNAL_SERVER_ERROR, { message: "Something went wrong!" });
   }
 }
+
+exports.getMeHandler = async (req, res) => {
+  try {
+    return res.status(200).json(res.locals.user);
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+}

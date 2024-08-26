@@ -26,4 +26,12 @@ async function createUser(input) {
   }
 }
 
-module.exports = { createUser, validateUser }
+async function getUser(query) {
+  try {
+    return await User.findOne({ ...query } || {});
+  } catch (error) {
+    throw new Error(error)
+  }
+}
+
+module.exports = { createUser, validateUser, getUser }
